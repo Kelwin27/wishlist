@@ -40,17 +40,17 @@ export const createWishlist = async (pageLogin) => {
     });
     content.append(title);
 
-    if (user.birthdayte) {
-        const birthday = new Date(user.birthdayte);
+    if (user.birthdate) {
+        const birthday = new Date(user.birthdate);
         const day = birthday.getDate();
-        const month = birthday.toLocaleString('default', { month: 'long'});
+        const month = birthday.toLocaleString('default', { month: 'long', day: 'numeric',}).split(' ')[1];
 
         const ageDifMs = Date.now() - birthday.getTime();
         const ageDate = new Date(ageDifMs);
         const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
         const plural = pluralizeYear(age);
-        const ageMessage = `${day} ${month} исполнится ${ageMessage} ${plural}`
+        const ageMessage = `${day} ${month} исполнится ${age} ${plural}`
 
         const birthdayElem = createElement('p', {
             className: 'profile__birthday',
